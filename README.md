@@ -1,6 +1,6 @@
 # Sc-Enhancement
 
-Mónica N. Zamora Zapata, Elynn Wu, Jan Kleissl. “Irradiance enhancement events in the coastal Stratocumulus dissipation process” Solar World Congress. Santiago, 2019 (Accepted)
+Mónica Zamora Zapata, Elynn Wu, Jan Kleissl. “Irradiance enhancement events in the coastal Stratocumulus dissipation process” Solar World Congress. Santiago, 2019 (Accepted)
 
 ## Enhancement events
 To follow the enhancement detection and processing, take a look at `main.m`. While the detection and characterization of IE events is done automatically, we manually checked if a day presented a Stratocumulus to clear transition. That was done by looking at the GHI timeseries. In case of doubt, we further checked sky imagery. The classification is available at `CloudClasses_TL.mat`.
@@ -12,4 +12,5 @@ This part was coded in python `Ramp_rate_control.py`. It takes the GHI data from
 
 ---
 mzamoraz at eng dot ucsd dot edu
-San Diego, August, 2019
+
+San Diego, August 2019
