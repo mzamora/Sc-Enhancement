@@ -1,3 +1,7 @@
+% Figure 1 - Sc Enhancement study
+% (ↄ) Mónica Zamora Z., July 2019. GNU GPL 3.0
+% SRAF at UCSD solar.ucsd.edu
+
 date=datetime(2017,6,17)
 %% Load data
 dir='EBU2/'; doy=day(date,'dayofyear');

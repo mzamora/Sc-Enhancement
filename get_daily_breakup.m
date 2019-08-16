@@ -1,9 +1,15 @@
-
 function get_daily_breakup(date,LinkeTurb)
+% Load GHI data for a day and find enhancement and down-ramp events.
+% Results are saved at the Breakups folder, and include
+%   GHI: timeseries of GHI, k, k_avg, SZA
+%   IE: each IE even represented by mag, duration, SZA, time
+%   Breakup: each breakup represented by tstart, tend, kstart
+%   Min: each down-ramp represented by mag, duration, SZA, time
+% Sc Enhancement study
+% (ↄ) Mónica Zamora Z., July 2019. GNU GPL 3.0
+% SRAF at UCSD solar.ucsd.edu
 
-%dir='/mnt/lab_45d1/database/DEMROES/5min_by_DoY/EBU2/';
-% dir='/mnt/lab_45d1/database/DEMROES/1s_by_DoY/EBU2/';
-dir='EBU2/';
+dir='EBU2/'; % Data folder
 doy=day(date,'dayofyear');
 filename=['EBU2_',num2str(year(date)),'_',num2str(doy)];
 load([dir,filename])
@@ -13,15 +19,13 @@ navg=901;
 GHI_avg=conv(GHI_day,ones(navg,1)/navg,'same');
 
 %% compute clear sky radiation
-% addpath(genpath('../libs/PV_LIB'))
-addpath(genpath('../PV_LIB'))
-Location.latitude = 32.881; Location.longitude = -117.232; Location.altitude = 125;
-%DN = datenum(date):1/(24*60):datenum(date+1-1/3600/24);
+addpath(genpath('../PV_LIB')) % Add pv lib if you don't have it already
+Location.latitude = 32.881; Location.longitude = -117.232; Location.altitude = 125; %EBU2 location
 DN=time_day;
 Time = pvl_maketimestruct(DN,-8);
 try
     [GHI_clearsky, ~, ~]= pvl_clearsky_ineichen(Time, Location,LinkeTurb);
-catch
+catch % In case no linke turbidity is specified, we use the climate values
     [GHI_clearsky, ~, ~]= pvl_clearsky_ineichen(Time, Location);
 end
 time_clearsky = datetime(DN,'ConvertFrom','datenum');
